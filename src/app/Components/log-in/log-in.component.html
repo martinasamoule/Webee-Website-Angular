@@ -1,0 +1,16 @@
+<form class="row g-3 border border-4 m-5 col-10 ">
+    <div class="col-md-12">
+      <label for="inputUserName" class="form-label" >Enter user Name</label>
+      <input type="text" class="form-control" id="inputUserName" #UserName>
+    </div>
+    <div class="col-md-12">
+      <label for="inputPassword" class="form-label">Enter Password</label>
+      <input type="password" class="form-control" id="inputPassword" #Password>
+    </div>
+    <div class="col-12 text-center mb-2">
+      <button type="submit" class="btn btn-success" (click)="Login(UserName.value , Password.value)" >
+      Log in
+      </button>
+    </div>
+</form>
+

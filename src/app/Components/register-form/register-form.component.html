@@ -1,0 +1,163 @@
+<div class="container border border-4 m-5">
+  <div>
+    Form Value:{{Email?.errors | json}}
+  </div>
+  <form [formGroup]="RegisterForm" class="m-3" (ngSubmit)="SubmitForm()">
+    <div class="mb-3">
+      <label for="FullName" class="form-label">FullName</label>
+      <input type="text" formControlName="fullName" class="form-control" id="FullName" name="userFname"
+        [class.is-invalid]="FullName?.invalid" [class.is-valid]="FullName?.valid">
+      <div class="alert alert-danger" [hidden]="FullName?.valid || FullName?.untouched">
+        <small *ngIf="FullName?.errors?.['required']">
+          Full Name is required
+        </small>
+        <small *ngIf="FullName?.errors?.['pattern']">
+          Full name must be 3 letters at least, <b>{{FullName?.errors?.['pattern'].actualValue}}</b> dosn't match.
+        </small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="Email" class="form-label">Email</label>
+      <input type="email" formControlName="email" class="form-control" id="Email" name="useremail"
+        [class.is-invalid]="Email?.invalid" [class.is-valid]="Email?.valid" (change)="CheckIsEmailUse()">
+      <div class="alert alert-danger" [hidden]="Email?.valid || Email?.untouched">
+        <small *ngIf="Email?.errors?.['required']">
+          Email is required
+        </small>
+        <small *ngIf="Email?.errors?.['pattern'] && Email?.touched">
+          Email must contain @ , <b>{{Email?.errors?.['pattern'].actualValue}}</b> dosn't match.
+        </small>
+        <small *ngIf="Email?.errors?.['existEmail']">
+          Entered Email is used before.
+        </small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="Password" class="form-label">Password</label>
+      <input type="password" formControlName="password" class="form-control" id="Password" name="Password"
+      [class.is-invalid]="Password?.invalid" [class.is-valid]="Password?.valid">
+      <div class="alert alert-danger" [hidden]="Password?.valid || Password?.untouched">
+        <small *ngIf="Password?.errors?.['required']">
+          Password is required
+        </small>
+        <small *ngIf="Password?.errors?.['pattern'] ">
+          Enterd password dosn't match.
+        </small>
+        <small *ngIf="Password?.errors?.['PassContainEmailOrName']">
+          Your password contain some info change it .
+        </small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="uCPass" class="form-label">Confirm Password</label>
+      <input type="password" formControlName="confirmPassword" class="form-control" id="uCPass" 
+      name="usercpass" [class.is-invalid]="ConfirmPassword?.invalid" [class.is-valid]="ConfirmPassword?.valid">
+        <div class="alert alert-danger" *ngIf="ConfirmPassword?.errors?.['required'] 
+        && ConfirmPassword?.touched">
+          Confirm Password is required
+        </div>
+        <div  class="alert alert-danger" *ngIf="RegisterForm?.errors?.['UnmatchedPassword'] && ConfirmPassword?.touched">
+          Confirm password must match password.
+        </div>
+    </div>
+
+
+    <div formGroupName="address">
+      <div class="mb-3">
+        <label for="AddressCity" class="form-label">City</label>
+        <input type="text" formControlName="city" class="form-control" id="AddressCity" name="AddressCity"
+          [class.is-invalid]="City?.invalid" [class.is-valid]="City?.valid">
+        <div class="alert alert-danger" [hidden]="City?.valid || City?.untouched">
+          <small *ngIf="City?.errors?.['required']">
+            City is required
+          </small>
+        </div>
+      </div>
+
+
+      <div class="mb-3">
+        <label for="AddressPostalCode" class="form-label">Postal Code</label>
+        <input type="number" formControlName="postalCode" class="form-control" id="AddressPostalCode" name="AddressPostalcode"
+          [class.is-invalid]="PostalCode?.invalid" [class.is-valid]="PostalCode?.valid">
+        <div class="alert alert-danger" [hidden]="PostalCode?.valid || PostalCode?.untouched">
+          <small *ngIf="PostalCode?.errors?.['required']">
+            Postal Codeis required
+          </small>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="AddressStreet" class="form-label">Street</label>
+        <input type="text" formControlName="street" class="form-control" id="AddressStreet" name="AddressStreet"
+          [class.is-invalid]="Street?.invalid" [class.is-valid]="Street?.valid">
+        <div class="alert alert-danger" [hidden]="Street?.valid || Street?.untouched">
+          <small *ngIf="Street?.errors?.['required']">
+            Street is required
+          </small>
+        </div>
+      </div>
+    </div>
+
+    <div formArrayName="phoneNumbers">
+      <div *ngFor=" let phoneNumber of PhoneNumbers.controls; let i=index">
+        <label for="{{'PhoneNum ' + i}}" class="form-label">Phone #{{i+1}}</label>
+        <div class="input-group mb-3">
+          <input type="text" [formControlName]="i" class="form-control" id="{{'PhoneNum ' + i}}" 
+          name="{{'PhoneNum ' + i}}" 
+          [class.is-invalid]="!PhoneNumbers.valid" [class.is-valid]="PhoneNumbers.valid">
+          <button class="btn btn-primary me-1" type="button" id="button-addon1 " 
+          (click)="AddNewPhoneNumber()" [disabled]="!phoneNumber.value">+</button>
+          <button class="btn btn-danger" type="button" id="button-addon1"[disabled]="i==0"
+          (click)="DeleteNewPhoneNumber()">-</button>
+        </div>
+        <div class="alert alert-danger" [hidden]="phoneNumber?.valid || phoneNumber?.untouched">
+          <small *ngIf="phoneNumber?.errors?.['required']">
+            phone number is required
+          </small>
+          <small *ngIf="phoneNumber?.errors?.['pattern'] && phoneNumber?.touched">
+            phone number dosn't match.
+          </small>
+        </div>
+      </div>      
+    </div>
+
+
+    <fieldset class="row mb-3">
+      <legend class="col-form-label col-sm-2 pt-0">Delievery Day : </legend>
+      <div class="col-sm-10">
+
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="delieveryOption" id="AnyDay"
+            (change)="UpdateDelieveryOption()" formControlName="delieveryOption" value="AnyDay">
+          <label class="form-check-label" for="AnyDay">
+            Any Day
+          </label>
+        </div>
+
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="delieveryOption" id="SpecificDay"
+            (change)="UpdateDelieveryOption()" formControlName="delieveryOption" value="SpecificDay">
+          <label class="form-check-label" for="SpecificDay">
+            Specific Day
+          </label>
+        </div>
+      </div>
+
+      <div class="mb-3 ms-3" *ngIf="DelieveryOption?.value=='SpecificDay'">
+        <label for="specificDay" class="form-label">Write day for delievery : </label>
+        <input type="date" formControlName="specificDay" class="form-control" id="specificDay" name="specificDay">
+      </div>
+    </fieldset>
+
+
+    <hr>
+    <div class="text-center">
+      <button [disabled]="RegisterForm.invalid" type="submit" class="btn btn-success">Submit</button>
+    </div>
+  </form>
+
+
+</div>

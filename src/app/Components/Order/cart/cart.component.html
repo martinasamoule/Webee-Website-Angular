@@ -1,0 +1,90 @@
+<div class="card text-center mx-5 my-2">
+  <div class="row g-0">
+    <div class="card-header fs-2">Your Orders</div>
+    <div class="col-md-2">
+      <img src="assets/shop.jpg" class="img-fluid rounded-start CartImg">
+    </div>
+    <div class="col-md-10">
+      <div class="card-body">
+        <div class="mb-2 mt-2">
+          <!-- <div class="m-2">
+            <label for="prdCat" class="form-label fs-2">Categories : </label>
+            <select class="form-select" name="category" id="prdCat" [(ngModel)]="ChosenCategory">
+              <option selected disabled>Choose the category</option>
+              <option value="0">All</option>
+              <option *ngFor="let item of Categories" [value]="item.Id">
+                {{ item.Name }}
+              </option>
+            </select>
+          </div> -->
+          <!-- <div class="input-group mt-3 mb-3">
+            <label class="form-label fs-4 ms-2">Price : </label>
+            <input #PriceFiltered type="number" class="form-control ms-3 me-1" placeholder="Enter the price "
+              aria-describedby="button-addon2" />
+            <button class="btn btn-success me-5" type="button" id="button-addon2"
+              (click)="PutPrice(PriceFiltered.value)">
+              Filter
+            </button>
+          </div> -->
+          <!-- <app-products  [PriceToFilter]="PriceFilterBy" -->
+             <!-- [RemovedElements]="AddedCartProducts" class="d-none"></app-products> -->
+            <!-- [SendedCategory]="ChosenCategory" (AddToCartElements)="PutCartElements($event)"-->
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Count</th>
+                <th scope="col"></th>
+                <th scope="col">Total</th>
+                <th scope="col"></th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let product of AddedCartProducts; let i = index">
+                <tr>
+                  <th scope="row">{{ i + 1 }}</th>
+                  <td>{{ product.ProductName }}</td>
+                  <td>{{ product.PriceOfProd | currency: "USD":"symbol"}}</td>
+                  <td>
+                  {{ product.CountOfProd }}
+                  <td>
+                  </td>
+                  <td>
+                    {{
+                      product.PriceOfProd * product.CountOfProd
+                        | currency: "USD":"symbol"
+                    }}
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-danger" (click)="RemoveProduct(product.ProductName)">
+                      Remove
+                    </button>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+          <p class="card-text fs-4">
+            Total Price : {{ TotalPrice | currency: "USD":"symbol" }}
+          </p>
+          <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="!Showes">
+            <strong>Thanks</strong> Your order is Done ....
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          <div class="d-grid gap-2">
+            <button type="button" class="btn btn-success m-3" (click)="ConfirmOrder()">
+              Confirm the order
+            </button>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    <div class="card-footer text-muted">
+        Today Date : {{ MyDate | date: "longDate" }}
+    </div>
+  </div>
+</div>

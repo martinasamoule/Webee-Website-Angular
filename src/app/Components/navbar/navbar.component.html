@@ -1,0 +1,39 @@
+<nav class="navbar  navbar-expand-lg navbar-light fw-bold bg-warning ">
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link " routerLink="Home" routerLinkActive="active">Home </a>
+        <a class="nav-item nav-link " routerLink="Products" routerLinkActive="active">Products</a>
+        <a class="nav-item nav-link " routerLink="Cart" routerLinkActive="active">Cart</a> 
+      </div>  
+    </div>
+    <div class=" navbar-nav right">
+      <div class="navbar-nav d-flex justify-content-center mt-2 mx-3" *ngIf="IsUser">
+        <p class="fw-bold"> {{UserName}} </p>
+      </div>
+      <a class="nav-item nav-link " routerLink="LogIn" routerLinkActive="active" *ngIf="!IsUser">Login</a>
+      <a class="nav-item nav-link " routerLink="Regist" routerLinkActive="active" *ngIf="!IsUser">Register</a>
+      <a class="nav-item nav-link " routerLink="User/UserProfile" routerLinkActive="active" *ngIf="IsUser">Profile</a>
+      <a class="nav-item nav-link " routerLink="User/EditProfile" routerLinkActive="active" *ngIf="IsUser">Edit profile</a>
+      <a type="button" class="nav-item nav-link"  data-bs-toggle="modal"
+       data-bs-target="#staticBackdrop" *ngIf="IsUser">Logout</a>
+    </div>
+    
+  </nav>
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" 
+  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Warning</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want logout ?!!!
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" >No</button>
+          <button type="button" class="btn btn-success " (click)="Logout()" data-bs-dismiss="modal" >yes..logout</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,20 @@
+<div class="row d-flex justify-content-around" >
+  <div class="card col-lg-5 mt-4 text-center  "  >
+    <img [src]="Product?.Img" class="card-img-top mt-1" alt="product image">
+    <div class="card-body">
+      <h5 class="card-title">
+        {{Product?.Name }}
+      </h5>
+      <p class="card-text ">Price : {{ Product?.Price | currency: 'USD': 'symbol'}}</p>
+      <p class="card-text" *ngIf="Product?.Quantity!=0; else outOfStock">Quantity : {{Product?.Quantity}}</p>
+      <ng-template #outOfStock>
+        <p>Out of Stock</p>
+      </ng-template>
+    </div>
+    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+        <button type="button" class="btn btn-dark" [ngClass]="{'disabled': WantedProductId == AllProducts[0].id}"(click)="Previous()">Previous</button>
+        <button type="button" class="btn btn-danger" (click)="Back()">Back</button>
+        <button type="button" class="btn btn-dark" [ngClass]="{'disabled': WantedProductId == AllProducts[AllProducts.length-1].id}" (click)="Next()">Next</button>
+      </div>
+  </div>
+</div>

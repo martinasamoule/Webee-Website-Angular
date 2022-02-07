@@ -1,0 +1,12 @@
+<div class="text-center">
+  <img src={{StoreInfo.logo}} class="m-4">
+</div>
+
+<h1 class="text-center mb-5">Welcome {{ClientName}} to our {{StoreInfo.Name}} market .</h1>
+
+<h3>- Our Branches:</h3>
+<ul>
+  <li *ngFor="let item of StoreInfo.branches" class="fs-4">
+    {{item}}
+  </li>
+</ul>

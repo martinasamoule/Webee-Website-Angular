@@ -1,0 +1,24 @@
+PassContainEmailOrName(): ValidatorFn {
+    return (FormControl: AbstractControl): ValidationErrors | null => {
+      let PassValue = FormControl.get('password');
+      let validationError = {'PassContainEmailOrName': { 'value': PassValue}}
+      let PassContainEmailOrName :boolean = false ;
+      let ContainName :boolean = false  ;
+      let ContainEmail :boolean = false ;
+      let EmailReg = new RegExp( FormControl.get('email')?.value,'i')  ;
+      let NameReg =  new RegExp(FormControl.get('fullName')?.value,'i')  ;
+      console.log(EmailReg)
+      ContainEmail = EmailReg.test(PassValue?.value) ;
+      ContainName = NameReg.test(PassValue?.value) ;
+      if ((ContainEmail&&ContainName) ||(ContainEmail||ContainName))
+      {
+        PassContainEmailOrName = true ;
+      }
+      else 
+      {
+        PassContainEmailOrName = false ;
+      }
+
+      return PassContainEmailOrName ? validationError : null;
+    };
+  }

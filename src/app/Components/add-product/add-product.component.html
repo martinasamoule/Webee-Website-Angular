@@ -1,0 +1,71 @@
+<div class="d-flex justify-content-center">
+<div class="alert alert-primary alert-dismissible fade show mt-3 col-md-5 " role="alert" *ngIf="Show">
+  <strong>{{Message}}</strong> 
+</div>
+</div>
+<form class="row g-3 border border-4 mb-5 mt-3 mx-5 col-12"(ngSubmit)="AddProduct()" #AddForm="ngForm">
+    <div class="col-md-6">
+      <label for="inputID" class="form-label">Product ID</label>
+      <input type="number" class="form-control" id="inputID" #ID='ngModel'  name="Id" 
+      [(ngModel)]="AddedProduct.id" required>
+      <div class="alert alert-danger" [hidden]="ID.valid || ID.untouched">
+        <small *ngIf="ID.errors?.['required']"> Id is required</small>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="prdCat" class="form-label f">Categories : </label>
+      <select #CategoryId='ngModel' class="form-select" name="category" id="prdCat" [(ngModel)]="AddedProduct.Categoryid" 
+      required>
+        <option selected disabled>Choose the category</option>
+        <option *ngFor="let category of Categories" [value]="category.id">
+          {{category.name}}
+        </option>
+      </select>
+      <div class="alert alert-danger" [hidden]="CategoryId.valid || CategoryId.untouched">
+        <small *ngIf="CategoryId.errors?.['required']"> Category is required</small>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <label for="inputName" class="form-label" >Product Name</label>
+      <input type="text" class="form-control" id="inputName" #Name='ngModel' name="Name" 
+      [(ngModel)]="AddedProduct.Name" required pattern="[A-Za-z0-9/s]{3,}">
+      <div class="alert alert-danger" [hidden]="Name.valid || Name.untouched">
+        <small *ngIf="Name.errors?.['required']"> Name is required</small>
+        <small *ngIf="Name.errors?.['pattern']"> Name must be 3 letters at least</small>
+      </div>
+    </div>
+    <div class="col-6">
+      <label for="inputQuantity" class="form-label">Quantity in Store </label>
+      <input type="number" class="form-control" id="inputQuantity" #Quantity='ngModel' name="Quantity" 
+      [(ngModel)]="AddedProduct.Quantity" required>
+      <div class="alert alert-danger" [hidden]="Quantity.valid || Quantity.untouched">
+        <small *ngIf="Quantity.errors?.['required']"> Quantity is required</small>
+      </div>
+    </div>
+    <div class="col-6">
+      <label for="inputPrice" class="form-label">Price</label>
+      <input type="number" class="form-control" id="inputPrice" #Price='ngModel' name="Price" 
+      [(ngModel)]="AddedProduct.Price" required>
+      <div class="alert alert-danger" [hidden]="Price.valid || Price.untouched">
+        <small *ngIf="Price.errors?.['required']"> Price is required</small>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <label for="inputImg" class="form-label">Img URL</label>
+      <input type="file" class="form-control" id="inputImg" #ImgURL='ngModel' name="Image" 
+      [(ngModel)]="AddedProduct.Img" required >
+      <div class="alert alert-danger" [hidden]="ImgURL.valid || ImgURL.untouched">
+        <small *ngIf="ImgURL.errors?.['required']"> Image URL is required</small>
+      </div>
+    </div>
+    <div class="col-12 text-center d-grid gap-2 mb-2">
+      <button type="submit" class="btn btn-success"  [disabled]="AddForm.invalid">
+      Add product to store
+      </button>
+    </div>
+  </form>
+
+  
+
+
+

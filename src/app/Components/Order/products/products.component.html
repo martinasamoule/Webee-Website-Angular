@@ -1,0 +1,81 @@
+<div class="d-flex justify-content-center">
+  <div class="alert alert-warning alert-dismissible fade show mt-3 col-md-5" role="alert" *ngIf="AdsShow">
+    <strong>Ads!</strong> {{AdMessage}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="AdsShow=false"></button>
+  </div>
+</div>
+<div class="border border-2 m-2">
+  <div class="m-2">
+    <label for="prdCat" class="form-label fs-2">Categories : </label>
+    <select #SelectedCategory class="form-select" name="category" id="prdCat"
+      (change)="FilterCategory(SelectedCategory.value)">
+      <option selected disabled>Choose the category</option>
+      <option value="0">All</option>
+      <option *ngFor="let item of Categories" [value]="item.id">
+        {{ item.name }}
+      </option>
+    </select>
+    <div class="d-grid gap-2  d-md-block  mt-2 text-center">
+      <button class="btn btn-success mx-3" type="button" routerLink="/AddProduct">Add new product</button>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-around " *ngIf="Showes">
+    <div class="card col-lg-3 m-3 text-center  " *ngFor="let product of FilterProductList; let i = index">
+      <a type="button" class="btn-close my-2" data-bs-toggle="modal" data-bs-target="#DeleteProduct"
+        aria-label="Close" (click)="WantToDeleteId=product.id"></a>
+        
+        <div class="modal fade" id="DeleteProduct" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Warning</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Are you sure youu want to delete this product ????
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+              <button type="button" class="btn btn-danger " data-bs-dismiss="modal"
+                (click)="DeleteProduct(WantToDeleteId)">yes..delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <img [src]=" product.Img " class="card-img-top mt-1" alt="product image">
+      <div class="card-body">
+        <h5 class="card-title" [ngClass]="{'text-decoration-line-through':product.Quantity==0}">
+          {{product.Name }}
+        </h5>
+        <p class="card-text">Price : {{ product.Price | currency: 'USD': 'symbol'}}</p>
+        <p class="card-text" *ngIf="product.Quantity!=0; else outOfStock">Quantity : {{product.Quantity}}</p>
+        <ng-template #outOfStock>
+          <p>Out of Stock</p>
+        </ng-template>
+        <div class="d-grid gap-2">
+          <td><input #Count type="number" class="form-control" min="1" max={{product.Quantity}}></td>
+          <button type="button" class="btn btn-success mt-2"
+            (click)="AddToCart(product.Quantity,product.Price , product.Name, Count.value , product.id)"
+            [ngClass]="{'btn-danger':product.Quantity==0 , 'btn-warning':product.Quantity==1 ,'disabled':product.Quantity==0 }">
+            Add to Cart
+          </button>
+        </div>
+        <div class="btn-group mt-2" role="group" aria-label="Basic mixed styles example">
+          <button class="btn btn-danger" type="button" [routerLink]="['/UpdateProduct' , product.id]">
+            Update product
+          </button>
+          <button class="btn btn-dark " type="button" [routerLink]="['/Products' , product.id]">
+            Details
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div *ngIf="!Showes" class="m-2 fs-3">Thanks for purchasing from our Store .</div>
+  <div class="d-grid gap-2">
+    <button type="button" class="btn btn-dark m-3" (click)="ToggleShow()">
+      Exit
+    </button> -->
+  <!-- </div> -->
+</div>
