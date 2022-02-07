@@ -1,0 +1,111 @@
+{
+  "Users": [
+    {
+      "Name": "Martina",
+      "email": "martinasamoule@gmail.com",
+      "Password": 1234567,
+      "id": 1
+    },
+    {
+      "fullName": "martina",
+      "email": "martinasamoule542@gmail.com",
+      "phoneNumbers": [
+        "0127633344"
+      ],
+      "address": {
+        "city": "jjkk",
+        "postalCode": 555,
+        "street": "jjkl"
+      },
+      "delieveryOption": "AnyDay",
+      "specificDay": "",
+      "password": "martinaMs#",
+      "confirmPassword": "martinaMs#",
+      "id": 2
+    }
+  ],
+  "Categories": [
+    {
+      "id": 1,
+      "name": "Labtops"
+    },
+    {
+      "id": 2,
+      "name": "Mobiles"
+    }
+  ],
+  "Products": [
+    {
+      "id": 1,
+      "Name": "Lenovo Labtop",
+      "Quantity": 0,
+      "Price": 500,
+      "Img": "https://picsum.photos/id/119/200/200",
+      "Categoryid": 1
+    },
+    {
+      "id": 2,
+      "Name": "Samsung Tab",
+      "Quantity": 1,
+      "Price": 600,
+      "Img": "https://picsum.photos/id/160/200/200",
+      "Categoryid": 2
+    },
+    {
+      "id": 3,
+      "Name": "Oppo nova ",
+      "Quantity": 120,
+      "Price": 300,
+      "Img": "https://picsum.photos/id/160/200/200",
+      "Categoryid": 2
+    },
+    {
+      "id": 4,
+      "Name": "Apple Labtop",
+      "Quantity": 1,
+      "Price": 200,
+      "Img": "https://picsum.photos/id/0/200/200",
+      "Categoryid": 1
+    },
+    {
+      "id": 5,
+      "Name": "Lenovo Labtop l3",
+      "Quantity": 50,
+      "Price": 500,
+      "Img": "https://picsum.photos/id/119/200/200",
+      "Categoryid": 1
+    },
+    {
+      "id": 6,
+      "Name": "Samsung s6",
+      "Quantity": 120,
+      "Price": 600,
+      "Img": "https://picsum.photos/id/160/200/200",
+      "Categoryid": 2
+    },
+    {
+      "id": 7,
+      "Name": "Oppo s5 ",
+      "Quantity": 0,
+      "Price": 300,
+      "Img": "https://picsum.photos/id/160/200/200",
+      "Categoryid": 2
+    },
+    {
+      "id": 8,
+      "Name": "Apple Labtop 2",
+      "Quantity": 50,
+      "Price": 200,
+      "Img": "https://picsum.photos/id/0/200/200",
+      "Categoryid": 1
+    },
+    {
+      "id": 9,
+      "Name": "Dell Labtop",
+      "Quantity": 10,
+      "Price": 500,
+      "Img": "https://picsum.photos/id/119/200/200",
+      "Categoryid": 1
+    }
+  ]
+}
